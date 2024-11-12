@@ -6,21 +6,29 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isHashValid, setIsHashValid] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
 
-  // Wait for validation to complete before rendering the page and stop the
-  // rendering if the hash is invalid. Comment out the following useEffect
-  // hook to see the page render without the hash validation.
   useEffect(() => {
-    axios
-      .post('/api/validate-hash', { hash: window.Telegram.WebApp.initData })
-      .then((response) => setIsHashValid(response.status === 200));
+    if (typeof window !== 'undefined') {
+      const initData = window.Telegram.WebApp.initData;
+
+      axios
+        .post('/api/validate-hash', { hash: initData })
+        .then((response) => {
+          setIsHashValid(response.status === 200);
+          if (response.status === 200) {
+            setUsername(window.Telegram.WebApp.initDataUnsafe?.user?.first_name || null);
+          }
+        })
+        .catch(() => setIsHashValid(false));
+    }
   }, []);
 
   if (!isHashValid) {
     return null;
   }
 
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} username={username} />;
 }
 
 export default MyApp;

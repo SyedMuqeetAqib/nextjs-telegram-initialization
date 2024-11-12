@@ -2,8 +2,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import GithubSvg from '../assets/GithubSvg';
+interface HomeProps {
+  username: string | null;
+}
 
-const Home: NextPage = () => {
+const Home: NextPage<HomeProps> = ({ username }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-telegram-white">
       <Head>
@@ -15,6 +18,7 @@ const Home: NextPage = () => {
         <span className="text-2xl font-bold text-telegram-black">
           This is a starter template using Next.js and Tailwind CSS for Telegram&apos;s Web Apps.
         </span>
+        <h1>{username ?? 'Username is not found'}</h1>
       </main>
 
       <footer className="flex h-20 w-full items-center justify-center border-t border-t-telegram-black">
@@ -25,7 +29,7 @@ const Home: NextPage = () => {
           rel="noopener noreferrer">
           Powered by{' '}
           <span className="text-telegram-link">mauriciobraz/next.js-telegram-webapp</span>
-          <GithubSvg className="h-6 w-6 fill-telegram-link" />
+          <GithubSvg className="size-6 fill-telegram-link" />
         </a>
       </footer>
     </div>
