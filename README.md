@@ -125,3 +125,13 @@ const Example: FC = () => {
 
 export default Example;
 ```
+
+## Credits
+
+This project is based on the original [next.js-telegram-webapp](https://github.com/mauriciobraz/next.js-telegram-webapp) repository created by [Mauricio Braz](https://github.com/mauriciobraz). The original repository provided a foundational implementation of a Telegram web application using Next.js and TypeScript.
+
+### Modifications and Updates
+
+This version includes updates to ensure compatibility with Next.js 14, addressing several issues from the original repository that prevented the app from running correctly in the latest Next.js environment.
+
+Special thanks to Mauricio Braz for the initial work and inspiration for this project.
